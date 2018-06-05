@@ -14,7 +14,8 @@ byte arrowU[8] = {  //custom LCD character arrow
   B00100,
   B00100
 };
-int IPv4[12] = {192,/*.*/168,/*.*/002,/*.*/001};
+int IPv4[4] = {192,/*.*/168,/*.*/002,/*.*/001};
+int subnet[4] = { 255, 255, 255, 255 };
 int lcd_key     = 0;
 int adc_key_in  = 0;  //default button before read
 #define btnRIGHT  0
@@ -46,7 +47,53 @@ int updateLCD(String input, int x = 0, int y = 0)
   lcd.print(input);
   return 0;
 }
-
+void calcIPv4()
+{
+  lcd.clear();
+  updateLCD("Subnet:", 0, 1);
+  bool t = false;
+  for (int i = 0; i < 4; i ++)
+  {
+    lcd.setCursor(i*4,0);
+        //to put a space before the subnet so that it does not start with a .
+    if (t == false)
+    {
+      lcd.print(" "+String(subnet[i]));
+      t=true;
+    }
+    else
+    {
+      lcd.print("."+String(subnet[i]));
+    }
+  }
+  bool comp = false;
+  while(comp == false)
+  {
+    delay(300);
+    lcd.setCursor(cursorPos[0], cursorPos[1]);
+    lcd_key = read_LCD_buttons();
+    switch (lcd_key)
+    {
+      case btnLEFT:
+        cursorPos[0]--;
+        break;
+      case btnRIGHT:
+        cursorPos [0] ++;
+        break;
+      case btnUP:
+        //if (cursorPos[0] >= 
+        break;
+      case btnDOWN:
+        
+        break;
+      case btnSELECT:
+        comp = true;
+        break;
+      
+    }
+  }
+  
+}
 void calcScrn()                   //Updates the calculator screen
 {
   delay(100);
@@ -56,6 +103,7 @@ void calcScrn()                   //Updates the calculator screen
   for (int i = 0; i < 4; i ++)
   {
     lcd.setCursor(i*4,0);
+        //to put a space before the IP so that it does not start with a .
     if (t == false)
     {
       lcd.print(" "+String(IPv4[i]));
@@ -120,6 +168,7 @@ void loop()
       switch(lcd_key)
         {
             case btnSELECT:
+              calcIPv4();
               updateLCD("Calculating Net", 0, 1);
               break;
             case btnRIGHT:
@@ -166,19 +215,31 @@ void loop()
               //######################Updates IP numbers on screen index ##################################################
               if(cursorPos[0] <=3 && cursorPos[0] !=0)
               {
+                if(IPv4[0]!=0)
+                {
                   IPv4[0]--;
+                }
               }
               if(cursorPos[0] >=5 && cursorPos[0] <=8)
               {
+                if(IPv4[1]!=0)
+                {
                   IPv4[1]--;
+                }
               } 
               if(cursorPos[0] >=9 && cursorPos[0] <=11)
               {
+                if(IPv4[2]!=0)
+                {
                   IPv4[2]--;
+                }
               }
                if(cursorPos[0] >=13 && cursorPos[0] <=15)
               {
+                if(IPv4[3]!=0)
+                {
                   IPv4[3]--;
+                }
               }
               //END ###################################################################################################
               break;

@@ -72,7 +72,7 @@ void calcIPv4()
   //lcd.blink();
   while(comp == false)
   {//####################SUBNET#######################################################################
-    delay(300);
+    delay(30);
     lcd.setCursor(cursorPos[0], cursorPos[1]);
     lcd_key = read_LCD_buttons();
      

@@ -67,11 +67,15 @@ void calcIPv4()
     }
   }
   bool comp = false;
+  lcd.setCursor(0,0);
+  lcd.cursor();
+  //lcd.blink();
   while(comp == false)
-  {
+  {//####################SUBNET#######################################################################
     delay(300);
     lcd.setCursor(cursorPos[0], cursorPos[1]);
     lcd_key = read_LCD_buttons();
+     
     switch (lcd_key)
     {
       case btnLEFT:
@@ -82,9 +86,70 @@ void calcIPv4()
         break;
       case btnUP:
         //if (cursorPos[0] >= 
+         if(cursorPos[0] <=3 && cursorPos[0] !=0)
+              {
+                  subnet[0]++;
+              }
+              if(cursorPos[0] >=5 && cursorPos[0] <=7)
+              {
+                  subnet[1]++;
+              } 
+              if(cursorPos[0] >=9 && cursorPos[0] <=11)
+              {
+                  subnet[2]++;
+              }
+               if(cursorPos[0] >=13 && cursorPos[0] <=15)
+              {
+                  subnet[3]++;
+              }
+               t = false;
+                for (int i = 0; i < 4; i ++)
+              {
+                lcd.setCursor(i*4,0);
+                    //to put a space before the subnet so that it does not start with a .
+                if (t == false)
+                {
+                  lcd.print(" "+String(subnet[i]));
+                  t=true;
+                }
+                else
+                {
+                  lcd.print("."+String(subnet[i]));
+                }
+              }
         break;
       case btnDOWN:
-        
+          t = false;
+         if(cursorPos[0] <=3 && cursorPos[0] !=0)
+              {
+                  subnet[0]--;
+              }
+              if(cursorPos[0] >=5 && cursorPos[0] <=7)
+              {
+                  subnet[1]--;
+              } 
+              if(cursorPos[0] >=9 && cursorPos[0] <=11)
+              {
+                  subnet[2]--;
+              }
+               if(cursorPos[0] >=13 && cursorPos[0] <=15)
+              {
+                  subnet[3]--;
+              }
+              for (int i = 0; i < 4; i ++)
+              {
+                lcd.setCursor(i*4,0);
+                    //to put a space before the subnet so that it does not start with a .
+                if (t == false)
+                {
+                  lcd.print(" "+String(subnet[i]));
+                  t=true;
+                }
+                else
+                {
+                  lcd.print("."+String(subnet[i]));
+                }
+              }
         break;
       case btnSELECT:
         comp = true;

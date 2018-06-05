@@ -88,19 +88,31 @@ void calcIPv4()
         //if (cursorPos[0] >= 
          if(cursorPos[0] <=3 && cursorPos[0] !=0)
               {
+                if (subnet[0] != 255)
+                {
                   subnet[0]++;
+                }
               }
               if(cursorPos[0] >=5 && cursorPos[0] <=7)
               {
+                if (subnet[1] != 255)
+                {
                   subnet[1]++;
+                }
               } 
               if(cursorPos[0] >=9 && cursorPos[0] <=11)
               {
+                if (subnet[2] != 255)
+                {
                   subnet[2]++;
+                }
               }
                if(cursorPos[0] >=13 && cursorPos[0] <=15)
               {
+                if (subnet[3] != 255)
+                {
                   subnet[3]++;
+                }
               }
                t = false;
                 for (int i = 0; i < 4; i ++)
@@ -120,21 +132,33 @@ void calcIPv4()
         break;
       case btnDOWN:
           t = false;
-         if(cursorPos[0] <=3 && cursorPos[0] !=0)
+          if(cursorPos[0] <=3 && cursorPos[0] !=0)
               {
+                if (subnet[0] != 0)
+                {
                   subnet[0]--;
+                }
               }
               if(cursorPos[0] >=5 && cursorPos[0] <=7)
               {
+                if (subnet[1] != 0)
+                {
                   subnet[1]--;
+                }
               } 
               if(cursorPos[0] >=9 && cursorPos[0] <=11)
               {
+                if (subnet[2] != 0)
+                {
                   subnet[2]--;
+                }
               }
                if(cursorPos[0] >=13 && cursorPos[0] <=15)
               {
+                if (subnet[3] != 0)
+                {
                   subnet[3]--;
+                }
               }
               for (int i = 0; i < 4; i ++)
               {
